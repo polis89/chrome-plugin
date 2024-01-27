@@ -5,8 +5,6 @@ chrome.runtime.onInstalled.addListener(() => {
 })
 
 chrome.action.onClicked.addListener(async tab => {
-  console.log('tab', tab)
-
   // Retrieve the action badge to check if the extension is 'ON' or 'OFF'
   const prevState = await chrome.action.getBadgeText({ tabId: tab.id })
   // Next state will always be the opposite
@@ -22,19 +20,26 @@ chrome.action.onClicked.addListener(async tab => {
     // Insert the CSS file when the user turns the extension on
     await chrome.scripting.insertCSS({
       files: ["storypact-styles.css"],
-      target: { tabId: tab.id },
+      target: { tabId: tab.id }
     });
     await chrome.scripting
       .executeScript({
         target : { tabId: tab.id },
-        files : [ "script.js" ],
+        files : [ "dist/main.js" ],
       });
   } else if (nextState === 'OFF') {
+    console.log('remove script');
+    
     // Run clean up Task
     // Remove the CSS file when the user turns the extension off
-    // await chrome.scripting.removeCSS({
-    //   files: ['focus-mode.css'],
-    //   target: { tabId: tab.id }
-    // })
+    await chrome.scripting.removeCSS({
+      files: ["storypact-styles.css"],
+      target: { tabId: tab.id }
+    });
+    await chrome.scripting
+      .executeScript({
+        target : { tabId: tab.id },
+        files : [ "detach.js" ],
+      });
   }
 })

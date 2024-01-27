@@ -1,0 +1,12 @@
+{
+  "name": "crome-plugin", 
+  "version": "1.0.0",
+  "private": true,
+  "repository": "git@github.com:polis89/chrome-plugin.git",
+  "author": "Dmitrii Polianskii <89polis@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^5.90.0",
+    "webpack-cli": "^5.1.4"
+  }
+}

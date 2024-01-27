@@ -3,5 +3,9 @@ body > .storypact-plugin-sidebar {
 	top: 0;
 	right: 0;
 	width: 300px;
-	background: grey;
+	background: #efefef;
+}
+
+body > .storypact-plugin-header {
+	margin-bottom: 10px;
 }
